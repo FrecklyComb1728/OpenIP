@@ -63,6 +63,7 @@ network.httpGet("https://api.uuni.cn/api/time", …)
 
 ## 依赖
 
+- Windows Server 2019 及以上 / Windows 10 21H2 及以上 / Linux 未知
 - LiteLoaderBDS 
 - 网络通畅，可访问外部 HTTP 请求  
 

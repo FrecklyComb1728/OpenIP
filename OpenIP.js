@@ -17,11 +17,13 @@ mc.listen("onServerStarted", () => {
         network.httpGet(`https://ip9.com.cn/get?ip=${mifeng.ip}`, {}, function(status, result) {
             if (status === 200) {
                 let data = JSON.parse(result).data;
-                mifeng.country = data.country || '未知';
-                mifeng.location = `${data.prov || ''} ${data.city || ''}`.trim() || '未知';
+                mifeng.country = data.country || '未知国家';
+                mifeng.location = `${data.prov || ''}${data.city || ''}`.trim() || '未知地区';
+                mifeng.isp = data.isp || '未知运营商';
             } else {
-                mifeng.country = '未知';
-                mifeng.location = '未知';
+                mifeng.country = '未知国家';
+                mifeng.location = '未知地区';
+                mifeng.isp = '未知运营商';
             }
 
             network.httpGet("https://api.uuni.cn/api/time", {}, function(status, result) {
@@ -32,7 +34,7 @@ mc.listen("onServerStarted", () => {
                     mifeng.date = `${currentDate.getFullYear()}年${currentDate.getMonth() + 1}月${currentDate.getDate()}日`;
                 } else {
                     mifeng.date = "未知日期";
-                    mifeng.day = "未知";
+                    mifeng.day = "未知星期";
                 }
 
                 mifeng.os = dv.os;
@@ -44,15 +46,17 @@ mc.listen("onServerStarted", () => {
                 colorLog("yellow", `玩家: ${player.name}，IP: ${mifeng.ip}`)
                 colorLog("yellow", `系统: ${mifeng.os}，延迟: ${dv.avgPing}ms`)
                 colorLog("yellow", `来自: ${mifeng.country}${mifeng.location}`);
+                colorLog("yellow", `运营商: ${dv.clientId}`);
                 colorLog("yellow", `ID:${dv.clientId}`)
                 colorLog("yellow", `=========================================`)
 
-                player.tell(`§4欢迎${player.name}你来到服务器!`, 0);
-                player.tell(`§4今天是${mifeng.date}${mifeng.day}`, 0);
+                player.tell(`§4欢迎§e${player.name}§4你来到服务器!`, 0);
+                player.tell(`§4您是${mifeng.os}操作系统`, 0);
+                player.tell(`§4今天是§e${mifeng.date}${mifeng.day}`, 0);
                 player.tell(`§4您的IP是:${mifeng.ip}`, 0);
                 player.tell(`§4您来自${mifeng.country}${mifeng.location}`, 0);
-                player.tell(`§4您的系统是${mifeng.os}操作系统`, 0);
-                player.tell(`§4您的延迟是${dv.avgPing}ms`, 0);
+                player.tell(`§4所属运营商为${dv.clientId}`, 0);
+                player.tell(`§4连接延迟为§e${dv.avgPing}ms`, 0);
             });
         });
 
