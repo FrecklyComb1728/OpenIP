@@ -46,7 +46,7 @@ mc.listen("onServerStarted", () => {
                 colorLog("yellow", `玩家: ${player.name}，IP: ${mifeng.ip}`)
                 colorLog("yellow", `系统: ${mifeng.os}，延迟: ${dv.avgPing}ms`)
                 colorLog("yellow", `来自: ${mifeng.country}${mifeng.location}`);
-                colorLog("yellow", `运营商: ${dv.clientId}`);
+                colorLog("yellow", `运营商: ${mifeng.isp}`);
                 colorLog("yellow", `ID:${dv.clientId}`)
                 colorLog("yellow", `=========================================`)
 
@@ -55,7 +55,7 @@ mc.listen("onServerStarted", () => {
                 player.tell(`§4今天是§e${mifeng.date}${mifeng.day}`, 0);
                 player.tell(`§4您的IP是:${mifeng.ip}`, 0);
                 player.tell(`§4您来自${mifeng.country}${mifeng.location}`, 0);
-                player.tell(`§4所属运营商为${dv.clientId}`, 0);
+                player.tell(`§4所属运营商为${mifeng.isp}`, 0);
                 player.tell(`§4连接延迟为§e${dv.avgPing}ms`, 0);
             });
         });
